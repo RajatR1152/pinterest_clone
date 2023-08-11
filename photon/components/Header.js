@@ -79,7 +79,7 @@ export default function Header() {
                 showNavs ? (
                     <div className="w-full h-fit md:hidden block justify-center gap-3 md:gap-2 items-center p-6">
                         <button className='bg-black text-white w-full px-5 py-3 mt-4'><Link href={'/'} >Home</Link></button>
-                        <button onClick={() => { create() }} className='bg-black text-white w-full px-5 py-3 mt-4'>Create</button>
+                        <button onClick={() => { create()}} className='bg-black text-white w-full px-5 py-3 mt-4'>Create</button>
                         <div className="bg-slate-200 w-full justify-center items-center rounded-full p-2 gap-3  my-4 flex">
                             <Link href={`search-user/${search}`}><FiSearch className='ms-3' size={30} /></Link>
                             <input type="text" placeholder='search...' onChange={(e) => { setSearch(e.target.value) }} className='p-2 w-full focus:outline-none bg-transparent' />
