@@ -8,7 +8,6 @@ const overrides = {
 
 export default function Spinner({ size, color }) {
 
-
     return (
 
         <div className="sweet-loading w-fit mx-auto text-center">

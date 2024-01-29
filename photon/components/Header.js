@@ -17,20 +17,7 @@ export default function Header() {
     const { data: session } = useSession();
     const db = getFirestore(app);
     const [search, setSearch] = useState('');
-
-    useEffect(() => {
-        saveUserInfo();
-    }, [session])
-
-    const saveUserInfo = async () => {
-        if (session?.user) {
-            await setDoc(doc(db, 'user', session.user.email), {
-                userName: session.user.name,
-                email: session.user.email,
-                userImg: session.user.image
-            })
-        }
-    }
+  
 
     function create() {
         if (session) {
@@ -53,16 +40,15 @@ export default function Header() {
                 <HiBell className='p-2 w-20 hover:bg-gray-200 rounded-full' size={60} />
                 <HiChat className='p-2 w-20 hover:bg-gray-200 rounded-full' size={60} />
                 {
-                    session && session.user ? (
+                    session?.user ? (
                         <div className="flex gap-4 ml-auto">
-                            <Link href={`/${session.user.email}`}><img src={session?.user?.image} alt="" className="w-16 h-12 rounded-full" /></Link>
+                            <Link href={`/${session?.user?.email}`}><img src={session?.user?.image} alt="" className="w-16 h-12 rounded-full" /></Link>
                         </div>
                     ) :
                         (
 
                             <button onClick={() => signIn()} className='bg-black text-white px-5 py-3 rounded-full'>Login</button>
                         )
-
                 }
             </div>
 
@@ -79,7 +65,7 @@ export default function Header() {
                 showNavs ? (
                     <div className="w-full h-fit md:hidden block justify-center gap-3 md:gap-2 items-center p-6">
                         <button className='bg-black text-white w-full px-5 py-3 mt-4'><Link href={'/'} >Home</Link></button>
-                        <button onClick={() => { create()}} className='bg-black text-white w-full px-5 py-3 mt-4'>Create</button>
+                        <button onClick={() => { create() }} className='bg-black text-white w-full px-5 py-3 mt-4'>Create</button>
                         <div className="bg-slate-200 w-full justify-center items-center rounded-full p-2 gap-3  my-4 flex">
                             <Link href={`search-user/${search}`}><FiSearch className='ms-3' size={30} /></Link>
                             <input type="text" placeholder='search...' onChange={(e) => { setSearch(e.target.value) }} className='p-2 w-full focus:outline-none bg-transparent' />
@@ -88,7 +74,7 @@ export default function Header() {
                             <HiBell className='p-2 w-20 hover:bg-gray-200 rounded-full' size={60} />
                             <HiChat className='p-2 w-20 hover:bg-gray-200 rounded-full' size={60} />
                             {
-                                session && session.user ? (
+                                session && session?.user ? (
                                     <div className="flex gap-4 justify-center items-center ml-auto">
                                         <Link href={`/${session.user.email}`}><img src={session?.user?.image} alt="" className="w-12 h-12 rounded-full" /></Link>
                                     </div>
@@ -99,7 +85,7 @@ export default function Header() {
 
                             }
                         </div>
-                    </div >
+                    </div>
                 ) :
                     (<></>)
             }

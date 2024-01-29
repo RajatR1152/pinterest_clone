@@ -37,7 +37,6 @@ export default function page() {
         getUserPins();
     }, [])
 
-
     const getUserPins = async () => {
         const q = query(collection(db, 'posts'), where("email", "==", param.user.replace('%40', "@")));
 
